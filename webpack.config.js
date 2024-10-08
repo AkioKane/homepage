@@ -17,6 +17,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/images', to: 'images' },
+        { from: 'src/fonts', to: 'fonts' },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -28,7 +34,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif|webp|ifif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/[name][ext][query]'
+          filename: 'images/[name][ext][query]'
         }
       },
       {
@@ -42,5 +48,8 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: 'single',
+  },
+  performance: {
+    hints: false,
   },
 };
